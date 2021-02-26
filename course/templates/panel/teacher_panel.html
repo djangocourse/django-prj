@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Homeworks</h1>
+    {% for homework in homeworks  %}
+      <a href="#">
+        <h4>Description: {{homework.text}}    Deadline: {{homework.deadline}}</h4>
+      </a>
+    {% endfor %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Description" name="text">
+      <input type="text" placeholder="Deadline" name="deadline">
+      <input type="submit" value="Add Homework">
+    </form>
+
+  </body>
+</html>
