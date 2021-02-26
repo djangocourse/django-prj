@@ -4,4 +4,5 @@ app_name = 'panel'
 
 urlpatterns = [
     path('', views.index_view,),
+    path('panel/', views.panel_view, name = 'panel'),
 ]

@@ -38,3 +38,20 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class Homework(models.Model):
+    text = models.TextField()
+    deadline = models.CharField(max_length = 250)
+
+    def __str__(self):
+        return self.text
+
+class Upload(models.Model):
+    homeword = models.ForeignKey(Homework, on_delete = models.CASCADE)
+    student = models.ForeignKey(UserProfile, on_delete = models.CASCADE)
+    file = models.FileField(upload_to = 'uploads')
+    score = models.PositiveIntegerField(default = None, null = True, blank = True)
+
+    def __str__(self):
+        return self.student.username
