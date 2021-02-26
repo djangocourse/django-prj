@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    {% if not user.is_authenticated %}
+
+      <form method="POST">
+        <input type="text" name="email" placeholder="Email" value="">
+        <input type="password" placeholder="password" name="password" value="">
+        <input type="submit" name="" value="login">
+      </form>
+
+    {% else %}
+
+      <a href="#">Go to Panel</a>
+
+    {% endif %}
+
+
+  </body>
+</html>
