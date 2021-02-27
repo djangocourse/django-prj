@@ -36,5 +36,10 @@
     <br><br>
 
     <h1>Course Videos</h1>
+
+    {% for vid in videos  %}
+      <a href="{% url 'panel:player' pk=vid.id %}">{{vid.file}}</a>
+      <br>
+    {% endfor %}
   </body>
 </html>

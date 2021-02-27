@@ -53,7 +53,7 @@ def video_view(request):
     else:
         return render(request, 'panel/student_vid.html', context = {'vids':vids})
 
-
+@login_required
 def upload_view(request, pk):
     form = forms.UploadForm()
 
@@ -67,3 +67,8 @@ def upload_view(request, pk):
             return redirect('panel:panel')
 
     return render(request, 'panel/upload.html', context = {'form':form})
+
+@login_required
+def player_view(request, pk):
+    vid = models.Video.objects.filter(pk = pk)[0]
+    return render(request, 'panel/player.html', context = {'video':vid})
