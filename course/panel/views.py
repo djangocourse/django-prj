@@ -87,3 +87,16 @@ def teacher_scores_view(request, pk):
             data.append( [user, None] )
 
     return render(request, 'panel/teacher_scores.html', context = {'data':data})
+
+@login_required
+def score_input_view(request, pk):
+    upload = models.Upload.objects.filter(pk = pk)[0]
+
+    if request.method == 'POST':
+        score = request.POST.get('score')
+
+        upload.score = score
+        upload.save()
+
+        return redirect('panel:panel')
+    return render(request, 'panel/score_input.html', context = {'upload':upload})

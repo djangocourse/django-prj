@@ -9,7 +9,7 @@
         border: 2px solid gray;
       }
     </style>
-    
+
   </head>
   <body>
 
@@ -29,7 +29,7 @@
           {% if s.1 %}
           <td>{{s.1.time}}</td>
           <td> <a href="{{s.1.file.url}}" download>file</a> </td>
-          <td>{{s.1.score}}</td>
+          <td>{{s.1.score}}     <a href="{% url 'panel:input_score' pk=s.1.id %}">Add Score</a> </td>
           {% endif %}
         </tr>
 
