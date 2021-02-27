@@ -11,4 +11,5 @@ urlpatterns = [
     path('panel/video/', views.video_view, name = 'video'),
     path('panel/upload/<int:pk>/', views.upload_view, name = 'upload'),
     path('player/<int:pk>/', views.player_view, name = 'player'),
+    path('panel/teacher/uploads/<int:pk>/', views.teacher_scores_view, name = 'scores'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

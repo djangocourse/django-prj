@@ -7,7 +7,7 @@
   <body>
     <h1>Homeworks</h1>
     {% for homework in homeworks  %}
-      <a href="#">
+      <a href="{% url 'panel:scores' pk=homework.id %}">
         <h4>Description: {{homework.text}}    Deadline: {{homework.deadline}}</h4>
       </a>
     {% endfor %}

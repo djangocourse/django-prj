@@ -72,3 +72,18 @@ def upload_view(request, pk):
 def player_view(request, pk):
     vid = models.Video.objects.filter(pk = pk)[0]
     return render(request, 'panel/player.html', context = {'video':vid})
+
+@login_required
+def teacher_scores_view(request, pk):
+    homework = models.Homework.objects.filter(pk = pk)[0]
+    data = []
+
+    for user in models.UserProfile.objects.all():
+        if user.is_teacher:
+            continue
+        if homework.get_upload(user):
+            data.append( [user, homework.get_upload(user)] )
+        else:
+            data.append( [user, None] )
+
+    return render(request, 'panel/teacher_scores.html', context = {'data':data})

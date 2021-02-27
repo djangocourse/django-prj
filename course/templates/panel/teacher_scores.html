@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style media="screen">
+      table, td, th{
+        border: 2px solid gray;
+      }
+    </style>
+    
+  </head>
+  <body>
+
+    <table>
+
+      <thead>
+        <th>Code</th>
+        <th>Upload date</th>
+        <th>File</th>
+        <th>Score</th>
+      </thead>
+
+      {% for s in data  %}
+
+        <tr>
+          <td>{{s.0.code}}</td>
+          {% if s.1 %}
+          <td>{{s.1.time}}</td>
+          <td> <a href="{{s.1.file.url}}" download>file</a> </td>
+          <td>{{s.1.score}}</td>
+          {% endif %}
+        </tr>
+
+      {% endfor %}
+
+    </table>
+
+  </body>
+</html>

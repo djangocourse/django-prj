@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.utils import timezone
 
 
 class UserProfileManager(BaseUserManager):
@@ -58,6 +59,7 @@ class Upload(models.Model):
     student = models.ForeignKey(UserProfile, on_delete = models.PROTECT, related_name = 'uploads')
     file = models.FileField(upload_to = 'uploads')
     score = models.PositiveIntegerField(default = None, null = True, blank = True)
+    time = models.DateField(default = timezone.now)
 
     def __str__(self):
         return self.student.username
