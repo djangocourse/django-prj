@@ -9,3 +9,6 @@ class VideoForm(forms.ModelForm):
         widgets = {
             'file': forms.FileInput(attrs={'accept': 'video/*'}),
         }
+
+class UploadForm(forms.Form):
+    file = forms.FileField()

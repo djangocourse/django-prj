@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -30,7 +30,14 @@ def panel_view(request):
 
         return render(request, 'panel/teacher_panel.html', context = {'homeworks':homeworks})
     else:
-        return render(request, 'panel/student_panel.html', context = {'homeworks':homeworks})
+        data = []
+        for homework in homeworks:
+            upload = homework.get_upload(request.user)
+            data.append( [homework, upload] )
+
+        videos = models.Video.objects.all()
+
+        return render(request, 'panel/student_panel.html', context = {'homeworks':data, 'videos':videos})
 
 @login_required
 def video_view(request):
@@ -45,3 +52,18 @@ def video_view(request):
         return render(request, 'panel/teacher_vid.html', context = {'vids':vids, 'form':form})
     else:
         return render(request, 'panel/student_vid.html', context = {'vids':vids})
+
+
+def upload_view(request, pk):
+    form = forms.UploadForm()
+
+    if request.method == 'POST':
+        form = forms.UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            homework = models.Homework.objects.filter(pk = pk)[0]
+            upload = models.Upload(homework = homework, file = file, student = request.user)
+            upload.save()
+            return redirect('panel:panel')
+
+    return render(request, 'panel/upload.html', context = {'form':form})

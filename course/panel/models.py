@@ -47,9 +47,15 @@ class Homework(models.Model):
     def __str__(self):
         return self.text
 
+    def get_upload(self, student):
+        for u in self.uploads.all():
+            if u.student == student:
+                return u
+        return None
+
 class Upload(models.Model):
-    homeword = models.ForeignKey(Homework, on_delete = models.CASCADE)
-    student = models.ForeignKey(UserProfile, on_delete = models.CASCADE)
+    homework = models.ForeignKey(Homework, on_delete = models.PROTECT, related_name = 'uploads')
+    student = models.ForeignKey(UserProfile, on_delete = models.PROTECT, related_name = 'uploads')
     file = models.FileField(upload_to = 'uploads')
     score = models.PositiveIntegerField(default = None, null = True, blank = True)
 
@@ -59,5 +65,3 @@ class Upload(models.Model):
 
 class Video(models.Model):
     file = models.FileField(upload_to='videos')
-
-    

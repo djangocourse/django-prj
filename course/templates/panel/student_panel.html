@@ -3,8 +3,38 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+
+    <style media="screen">
+      table, td, th{
+        border: 2px solid gray;
+      }
+    </style>
   </head>
   <body>
+    <h1>Homeworks</h1>
 
+    <table>
+      <thead>
+        <th>Description</th>
+        <th>Deadline</th>
+        <th>Score</th>
+        <th>Answer</th>
+      </thead>
+      {% for homework in homeworks  %}
+        <tr>
+          <td>{{homework.0.text}}</td>
+          <td>{{homework.0.deadline}}</td>
+          <td>{% if homework.1 %} {{homework.1.score}} {% else %} - {% endif %}</td>
+          <td>
+            <a href="{% url 'panel:upload' pk=homework.0.id %}">Upload</a>
+            {% if homework.1 %} {{homework.1.file}} {% else %} - {% endif %}
+              </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <br><br>
+
+    <h1>Course Videos</h1>
   </body>
 </html>
