@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <h1>Course Videos</h1>
+    {% for vid in vids  %}
+    <a href="#">
+      <h4>{{vid.file}}</h4>
+    </a>
+    {% endfor %}
+    <form method="POST" enctype="multipart/form-data">
+      {{form.as_p}}
+      {% csrf_token %}
+      <input type="submit" name="" value="Upload">
+    </form>
+
+  </body>
+</html>

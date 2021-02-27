@@ -55,3 +55,9 @@ class Upload(models.Model):
 
     def __str__(self):
         return self.student.username
+
+
+class Video(models.Model):
+    file = models.FileField(upload_to='videos')
+
+    
